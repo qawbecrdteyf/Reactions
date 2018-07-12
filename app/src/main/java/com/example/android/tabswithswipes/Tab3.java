@@ -67,7 +67,7 @@ public class Tab3 extends Fragment{
 
         });
 
-        returnedFriends = FireBaseMethods.readFriends(new FirebaseCallback2(){
+        /*returnedFriends = FireBaseMethods.readFriends(new FirebaseCallback2(){
 
             @Override
             public void onCallback(ArrayList<Friends> returnedFriends) {
@@ -75,7 +75,7 @@ public class Tab3 extends Fragment{
             }
 
 
-        });
+        });*/
 
 
         //Log.d("TINDER-CHAITANYA", returnedString);

@@ -1,16 +1,28 @@
 package com.example.android.tabswithswipes;
 
+import android.app.ProgressDialog;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,12 +32,14 @@ import java.util.ArrayList;
 
 class FireBaseMethods {
 
+    private StorageReference mStorageRef;
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static DatabaseReference myRef = database.getReference();
     //DatabaseReference myRef2 = database.getReference("user_info");
     static int usernameexists = 0;
     static FirebaseAuth auth = FirebaseAuth.getInstance();
     static boolean isUnique = true;
+    private Uri downloadUrl;
     static String[] returnedvalues2;
     static ArrayList<Friends> returnedFriends;
 
@@ -57,7 +71,7 @@ class FireBaseMethods {
                     Log.d("snapshot", ds.toString());
 
                     usertemp.setUsername(ds.getValue(Models.class).getUsername());
-                    Log.d("username of temp", usertemp.getUsername());
+                    //Log.d("username of temp", usertemp.getUsername());
                     if (usertemp.getUsername().equals(getusername)) {
                         Log.d("entring", "shit");
                         usernameexists = 1;
@@ -202,97 +216,18 @@ class FireBaseMethods {
         return returnedFriends;
     }
 
+    public void makeapost(String uploadtext, String uploadUri) {
 
-    /*public static String[] readData(final FirebaseCallback firebaseCallback) {
-        myRef.child("user_info").child(auth.getCurrentUser().getUid()).child("username").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                returnedvalues2[3] = (String) dataSnapshot.getValue();
-                firebaseCallback.onCallback(returnedvalues2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        myRef.child("user_info").child(auth.getCurrentUser().getUid()).child("bio").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                returnedvalues2[1] = (String) dataSnapshot.getValue();
-                firebaseCallback.onCallback(returnedvalues2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        myRef.child("user_info").child(auth.getCurrentUser().getUid()).child("profile_photo").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                returnedvalues2[2] = (String) dataSnapshot.getValue();
-                firebaseCallback.onCallback(returnedvalues2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        myRef.child("user_info").child(auth.getCurrentUser().getUid()).child("name").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                returnedvalues2[0] = (String) dataSnapshot.getValue();
-                Log.d("nameretrivingfirst", returnedvalues2[0]);
-                firebaseCallback.onCallback(returnedvalues2[]);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        /*
+        Post p = new Post(uploadtext, uploadUri, ServerValue.TIMESTAMP, auth.getCurrentUser().getUid().toString());
+        //Models2 userinfo = new Models2(getEmailId, getFullName, getusername);
+        String UserID = auth.getCurrentUser().getUid();
+        Log.d("userid", UserID);
+        //Log.d("tree", myRef.child("users").child("YkH8avdKK3TJ9h9YxsWq5zqPCTH2").child("email_adr").toString());
+        myRef.child("users").child(UserID).setValue(user);
+        myRef.child("user_info").child(UserID).setValue(userinfo);
+        Log.d("added", "account is added in db");*/
+    }
 
 
-        myRef.child("user_info").child(auth.getCurrentUser().getUid()).child("email_adr").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                returnedvalues2[4] = (String) dataSnapshot.getValue();
-                firebaseCallback.onCallback(returnedvalues2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //firebaseCallback.onCallback(returnedvalues2);
-        Log.d("retrievedvalues", returnedvalues2[0] + returnedvalues2[1]);
-        return returnedvalues2;
-
-    }*/
-
-
-    /*public static String readData2(final FirebaseCallback firebaseCallback) {
-        myRef.child("user_info").child(auth.getCurrentUser().getUid()).child("username").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                returnedString = (String) dataSnapshot.getValue();
-                firebaseCallback.onCallback(returnedString);
-                Log.d("FIREBASECALLACK", returnedString);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        //Log.d("MSGIN READDATA2", returnedString);
-        return returnedString;
-    }*/
 }

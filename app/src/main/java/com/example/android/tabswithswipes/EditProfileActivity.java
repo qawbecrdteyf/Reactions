@@ -30,6 +30,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -51,6 +53,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private static Uri downloadUri;
     private static Uri downloadUrl;
     private static ImageView saveChanges;
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static DatabaseReference myRef = database.getReference();
     private StorageReference mStorageRef;
 
     @Override
@@ -182,91 +186,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
             }
-
-            Log.d("ASYNCTSKENTER","MADARCHOD");
-               /*
-            try {
-                Uri uristr = new AsyncTask<Uri, Void, Uri>(){
-
-                    ProgressDialog pd = new ProgressDialog(EditProfileActivity.this);
-                    @Override
-                    protected  void onPreExecute(){
-                        Log.d("PREE", "pre execute starts");
-                        super.onPreExecute();
-                        pd.setTitle("Uploading");
-                        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                        pd.setMessage("uploading");
-                        pd.show();
-                    }
-
-                    @Override
-                    protected Uri doInBackground(Uri... uris) {
-                        Log.d("DOINB", "do in bg starts");
-                        Uri selectedImage = uris[0];
-                        final StorageReference profileref = mStorageRef.child("images/rivers.jpg");
-                        //String selectedimage_string  = strings[0];
-                        UploadTask uploadTask = profileref.putFile(selectedImage);
-
-                        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                            @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                if (!task.isSuccessful()) {
-                                    Log.d("exception error", "Kuch to hua hai");
-                                    throw task.getException();
-                                }
-
-                                // Continue with the task to get the download URL
-                                return profileref.getDownloadUrl();
-                            }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    downloadUri = task.getResult();
-                                    Log.d("uridownload", downloadUri.toString());
-                                    //return downloadUri;
-                                } else {
-                                    // Handle failures
-                                    // ...
-                                    Log.d("exception2 error", "Kuch to hua hai");
-                                }
-                            }
-                        });
-                        Log.d("post", "do in bg mei issue");
-                        return downloadUri;
-                    }
-
-                    @Override
-                    protected  void  onPostExecute(Uri urireturn){
-                        super.onPostExecute(urireturn);
-                        Log.d("OPE","on post execute start");
-
-
-
-                        synchronized (this){
-                            try {
-                                this.wait(4000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-
-
-                        if(pd!=null){
-                            pd.dismiss();
-                            Log.d("pd is dismissed","DEMISE OF PD");
-                            Toast.makeText(EditProfileActivity.this, "Uploading done", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                }.execute(selectedImage).get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-*/
 
             //Uri urig = getImageUri(this, bitmap);
             Log.d("FTShit",selectedImage.toString());

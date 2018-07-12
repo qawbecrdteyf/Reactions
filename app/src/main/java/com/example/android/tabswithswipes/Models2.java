@@ -1,10 +1,12 @@
 package com.example.android.tabswithswipes;
 
+import java.util.ArrayList;
+
 public class Models2 {
 
     private String email_adr;
     private String username;
-    private String activities;
+    //private ArrayList<Post> activities;
     private String bio;
     private Long friends;
     private String profile_photo;
@@ -14,10 +16,10 @@ public class Models2 {
         this.email_adr = email_adr;
         this.name = name;
         this.username = username;
-        this.activities = "none";
+        //this.activities = new ArrayList<Post>();
         this.friends = 0L;
-        this.bio = "post your bio";
-        this.profile_photo = "none";
+        this.bio = "post your bio here";
+        this.profile_photo = "gs://reactions-4f81f.appspot.com/ANDROID.png";
     }
 
     public String getEmail_adr() {
@@ -26,10 +28,6 @@ public class Models2 {
 
     public String getName() {
         return name;
-    }
-
-    public String getActivities() {
-        return activities;
     }
 
     public String getBio() {
@@ -65,10 +63,6 @@ public class Models2 {
 
     public void setEmail_adr(String email_adr){
         this.email_adr = email_adr;
-    }
-
-    public void setActivities(String activities) {
-        this.activities = activities;
     }
 
     public void setBio(String bio) {

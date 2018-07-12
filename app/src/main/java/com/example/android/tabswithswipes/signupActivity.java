@@ -96,10 +96,10 @@ public class signupActivity extends AppCompatActivity {
         }else if(getPassword.length()<6){
             Toast.makeText(this, "Password too short, enter minimum 6 characters", Toast.LENGTH_SHORT)
                     .show();
-        }else if(!FireBaseMethods.CheckForUsernameInDataBase(getusername)){
+        }/*else if(!FireBaseMethods.CheckForUsernameInDataBase(getusername)){
               Toast.makeText(signupActivity.this, "This userName is already taken", Toast.LENGTH_SHORT).show();
               FireBaseMethods.reinit();
-        }
+        }*/
         else{
             auth.createUserWithEmailAndPassword(getEmailId, getPassword)
                     .addOnCompleteListener(signupActivity.this, new OnCompleteListener<AuthResult>() {
