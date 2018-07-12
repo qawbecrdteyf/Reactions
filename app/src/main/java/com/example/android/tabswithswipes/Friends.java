@@ -1,6 +1,6 @@
 package com.example.android.tabswithswipes;
 
-class Friends {
+ public class Friends {
 
     String profile_photo;
     String username;

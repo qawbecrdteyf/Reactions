@@ -38,6 +38,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".CreatePoll"
             android:screenOrientation="portrait"></activity>
+            <activity android:name=".FriendsProfile"></activity>
     </application>
 
 </manifest>
